@@ -50,3 +50,39 @@ public class Produto {
         this.quantidade = quantidade;
     }
 }
+
+package com.exemplo;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class ProdutoService {
+    private List<Produto> produtos = new ArrayList<>();
+    private Long idCounter = 1L;
+
+    public List<Produto> listarTodos() {
+        return produtos;
+    }
+
+    public void salvar(Produto produto) {
+        if (produto.getId() == null) {
+            produto.setId(idCounter++);
+            produtos.add(produto);
+        } else {
+            for (int i = 0; i < produtos.size(); i++) {
+                if (produtos.get(i).getId().equals(produto.getId())) {
+                    produtos.set(i, produto);
+                    break;
+                }
+            }
+        }
+    }
+
+    public Produto buscarPorId(Long id) {
+        return produtos.stream().filter(p -> p.getId().equals(id)).findFirst().orElse(null);
+    }
+
+    public void deletar(Long id) {
+        produtos.removeIf(p -> p.getId().equals(id));
+    }
+}
