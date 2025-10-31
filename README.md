@@ -1,7 +1,3 @@
-# sistema-web-Spring-Web.
-att 3
-package com.exemplo;
-
 public class Produto {
     private Long id;
     private String nome;
